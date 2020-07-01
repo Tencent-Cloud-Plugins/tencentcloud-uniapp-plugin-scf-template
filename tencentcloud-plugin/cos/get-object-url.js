@@ -16,7 +16,7 @@
 
 'use strict';
 
-const COS = require('cos-nodejs-sdk-v5');
+const crypto = require('crypto');
 const { secretId, secretKey } = require('../config');
 const { bucket, region, expires } = require('./config');
 
@@ -31,17 +31,23 @@ function getObjectURL({ key }) {
   if (!secretId || !secretKey || !bucket || !region || isNaN(expires) || expires <= 0) {
     throw new Error('请检查云函数配置文件!');
   }
-  return new COS({
-    SecretId: secretId,
-    SecretKey: secretKey,
-  }).getObjectUrl({
-    Bucket: bucket,
-    Region: region,
-    Method: 'GET',
-    Key: key,
-    Expires: expires,
-    Sign: true,
-  });
+  // 生成签名信息
+  const currentDate = new Date();
+  const expirationDate = new Date(currentDate.getTime() + expires * 1000);
+  const keyTime = `${Math.floor(currentDate.getTime() / 1000)};${Math.floor(expirationDate.getTime() / 1000)}`;
+  const signKey = crypto.createHmac('sha1', secretKey).update(keyTime).digest('hex');
+  const httpString = `get\n/${key}\n\n\n`;
+  const httpStringHash = crypto.createHash('sha1').update(httpString).digest('hex');
+  const stringToSign = `sha1\n${keyTime}\n${httpStringHash}\n`;
+  const signature = crypto.createHmac('sha1', signKey).update(stringToSign).digest('hex');
+  return `https://${bucket}.cos.${region}.myqcloud.com/${key}`
+    + `?q-sign-algorithm=sha1`
+    + `&q-ak=${secretId}`
+    + `&q-sign-time=${keyTime}`
+    + `&q-key-time=${keyTime}`
+    + `&q-header-list=`
+    + `&q-url-param-list=`
+    + `&q-signature=${signature}`;
 }
 
 module.exports = getObjectURL;
