@@ -16,17 +16,12 @@
 
 'use strict';
 
-const { bucket, region } = require('./config');
-
-const getObjectURL = require('./get-object-url');
-const signPostObjectAPI = require('./sign-post-object-api');
-const getExtraReportInfo = () => ({
-  'cos_bucket': bucket,
-  'cos_region': region,
-});
+const getUploadSignature = require('./get-upload-signature');
+const getMediaInfo = require('./get-media-info');
+const getAntiTheftURL = require('./get-anti-theft-url.js');
 
 module.exports = {
-  getObjectURL,
-  signPostObjectAPI,
-  getExtraReportInfo,
+  getUploadSignature,
+  getMediaInfo,
+  getAntiTheftURL,
 };

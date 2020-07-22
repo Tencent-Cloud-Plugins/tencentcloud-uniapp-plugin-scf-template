@@ -16,8 +16,14 @@
 
 'use strict';
 
+const { report } = require('./common');
+
 const modules = {
   COS: require('./cos'),
+  SMS: require('./sms'),
+  OCR: require('./ocr'),
+  VOD: require('./vod'),
+  CAPTCHA: require('./captcha'),
 };
 
 /**
@@ -32,6 +38,11 @@ exports.main = async (event) => {
   if (!modules[module] || !modules[module][action]) {
     throw new Error(`${module}.${action}不存在`);
   }
+  // 数据统计
+  const getExtraInfoMethod = modules[module]['getExtraReportInfo'];
+  const extraInfo = getExtraInfoMethod ? getExtraInfoMethod() : {};
+  report(module, extraInfo);
+  // 调用相应的模块
   const result = await modules[module][action](params);
   return result;
 };

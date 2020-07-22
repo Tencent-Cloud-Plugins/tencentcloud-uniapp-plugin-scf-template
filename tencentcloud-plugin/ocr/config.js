@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-'use strict';
+"use strict";
 
-const { bucket, region } = require('./config');
-
-const getObjectURL = require('./get-object-url');
-const signPostObjectAPI = require('./sign-post-object-api');
-const getExtraReportInfo = () => ({
-  'cos_bucket': bucket,
-  'cos_region': region,
-});
-
+// 腾讯云uni-app OCR插件依赖云函数的配置
+// 可用地域列表参数
+// 华北地区(北京)	ap-beijing
+// 华南地区(广州)	ap-guangzhou
+// 港澳台地区(中国香港)	ap-hongkong
+// 华东地区(上海)	ap-shanghai
+// 北美地区(多伦多)	na-toronto
 module.exports = {
-  getObjectURL,
-  signPostObjectAPI,
-  getExtraReportInfo,
+  region: "ap-guangzhou", // 地域列表
 };

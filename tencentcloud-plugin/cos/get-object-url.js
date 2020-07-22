@@ -28,8 +28,14 @@ const { bucket, region, expires } = require('./config');
  */
 function getObjectURL({ key }) {
   // 配置校验
-  if (!secretId || !secretKey || !bucket || !region || isNaN(expires) || expires <= 0) {
-    throw new Error('请检查云函数配置文件!');
+  if (!secretId || !secretKey) {
+    throw new Error('请云函数配置文件中配置secretId和secretKey');
+  }
+  if (!bucket || !region) {
+    throw new Error('请在云函数COS模块中配置bucket和region');
+  }
+  if (isNaN(expires) || expires <= 0) {
+    throw new Error('请在云函数COS模块中配置有效的expires');
   }
   // 生成签名信息
   const currentDate = new Date();

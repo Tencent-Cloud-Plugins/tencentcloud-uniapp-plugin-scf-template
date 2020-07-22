@@ -16,17 +16,18 @@
 
 'use strict';
 
-const { bucket, region } = require('./config');
+const { appId } = require('./config');
 
-const getObjectURL = require('./get-object-url');
-const signPostObjectAPI = require('./sign-post-object-api');
-const getExtraReportInfo = () => ({
-  'cos_bucket': bucket,
-  'cos_region': region,
-});
+const sendSMS = require('./send-sms');
+const sendVerificationCode = require('./send-verification-code');
+const checkVerificationCode = require('./check-verification-code');
+const getPackagesStatistics = require('./get-packages-statistics');
+const getExtraReportInfo = () => ({ 'sms_appid': appId });
 
 module.exports = {
-  getObjectURL,
-  signPostObjectAPI,
+  sendSMS,
+  sendVerificationCode,
+  checkVerificationCode,
+  getPackagesStatistics,
   getExtraReportInfo,
 };

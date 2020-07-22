@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-'use strict';
+"use strict";
 
-const { bucket, region } = require('./config');
-
-const getObjectURL = require('./get-object-url');
-const signPostObjectAPI = require('./sign-post-object-api');
-const getExtraReportInfo = () => ({
-  'cos_bucket': bucket,
-  'cos_region': region,
-});
-
+// 腾讯云uni-app验证码插件依赖云函数的配置
 module.exports = {
-  getObjectURL,
-  signPostObjectAPI,
-  getExtraReportInfo,
+  appId: 0, // 申请的场景 ID integer类型
+  appSecretKey: "", // AppSecretKey用于服务器端校验验证码票据的验证密钥
 };

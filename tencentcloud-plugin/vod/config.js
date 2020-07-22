@@ -16,17 +16,9 @@
 
 'use strict';
 
-const { bucket, region } = require('./config');
-
-const getObjectURL = require('./get-object-url');
-const signPostObjectAPI = require('./sign-post-object-api');
-const getExtraReportInfo = () => ({
-  'cos_bucket': bucket,
-  'cos_region': region,
-});
-
+// 腾讯云uni-app云点播VOD插件依赖云函数的配置
 module.exports = {
-  getObjectURL,
-  signPostObjectAPI,
-  getExtraReportInfo,
+  uploadExpires: 60, // 上传签名有效期（单位：秒）
+  antiTheftKey: '', // 防盗链key，如果未开启Key防盗链，请留空此项
+  antiTheftExpires: 60, // 防盗链接有效时长（单位：分钟）
 };
