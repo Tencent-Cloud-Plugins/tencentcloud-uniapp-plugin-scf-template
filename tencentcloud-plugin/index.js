@@ -24,6 +24,10 @@ const modules = {
   OCR: require('./ocr'),
   VOD: require('./vod'),
   CAPTCHA: require('./captcha'),
+  TIIA: require('./tiia'),
+  TMS: require('./tms'),
+  IMS: require('./ims'),
+  ASR: require('./asr'),
 };
 
 /**

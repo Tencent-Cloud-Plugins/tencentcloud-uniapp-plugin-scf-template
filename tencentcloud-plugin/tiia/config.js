@@ -15,10 +15,12 @@
  */
 
 "use strict";
-// 腾讯云uni-app插件依赖云函数的公共配置
+
+// 腾讯云uni-app 图像识别插件依赖云函数的配置
+// 可用地域列表参数
+// 华北地区(北京)	ap-beijing
+// 华南地区(广州)	ap-guangzhou
+// 华东地区(上海)	ap-shanghai
 module.exports = {
-  appId: process.env.secretId || '', // 腾讯云appId
-  secretId: process.env.secretId || "", // 腾讯云secretId
-  secretKey: process.env.secretKey || "", // 腾讯云secretKey
-  isReport: true, // 是否允许上报插件使用情况（注：仅在首次使用时会上报一次，对正常业务逻辑无影响）
+  region: "ap-guangzhou", // 地域列表
 };
