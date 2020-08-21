@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-"use strict";
-// 腾讯云uni-app插件依赖云函数的公共配置
+'use strict';
+
+const getVoicePoint = require('./get-voice-point');
+
 module.exports = {
-  appId: process.env.secretId || "", // 腾讯云appId
-  secretId: process.env.secretId || "", // 腾讯云secretId
-  secretKey: process.env.secretKey || "", // 腾讯云secretKey
-  isReport: true, // 是否允许上报插件使用情况（注：仅在首次使用时会上报一次，对正常业务逻辑无影响）
+  getVoicePoint
 };

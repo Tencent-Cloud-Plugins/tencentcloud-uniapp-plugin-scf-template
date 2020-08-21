@@ -132,7 +132,6 @@ class RealTime {
    */
   sendRequest(chunk) {
     if (chunk.size === 0) {
-      console.log("content length can not be empty");
       return "";
     }
     let query = this.createQuery();

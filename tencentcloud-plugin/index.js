@@ -28,6 +28,7 @@ const modules = {
   TMS: require('./tms'),
   IMS: require('./ims'),
   ASR: require('./asr'),
+  SOE: require('./soe'),
 };
 
 /**
