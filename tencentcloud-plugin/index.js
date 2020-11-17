@@ -29,6 +29,7 @@ const modules = {
   IMS: require('./ims'),
   ASR: require('./asr'),
   SOE: require('./soe'),
+  HTTPDNS: require('./httpdns'),
 };
 
 /**
