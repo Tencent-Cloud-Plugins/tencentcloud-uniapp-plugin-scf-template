@@ -24,5 +24,5 @@ module.exports = {
   verificationCodeTemplateId: '', // 验证码短信模板ID（模板中必需包含且只能包含一个变量值，用于填充验证码）
   verificationCodeLength: 4, // 验证码长度4~8（注：验证码为纯数字）
   verificationCodeExpires: 5, // 验证码有效期（单位：分钟）
-  verificationCodeCheckTimes: 5, // 验证码有效次数，即允许用户输入错误次数，达到后自动失效
+  verificationCodeCheckTimes: 5 // 验证码有效次数，即允许用户输入错误次数，达到后自动失效
 };

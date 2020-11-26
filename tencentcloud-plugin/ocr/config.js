@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
 // 腾讯云uni-app OCR插件依赖云函数的配置
 // 可用地域列表参数
@@ -24,5 +24,5 @@
 // 华东地区(上海)	ap-shanghai
 // 北美地区(多伦多)	na-toronto
 module.exports = {
-  region: "ap-guangzhou", // 地域列表
+  region: 'ap-guangzhou' // 地域列表
 };

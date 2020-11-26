@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-"use strict";
-const { appId, appSecretKey } = require("./config.js");
-const { request } = require("./utils.js");
-const getExtraReportInfo = () => ({ 'captcha_appid': appId });
+'use strict';
+const { appId, appSecretKey } = require('./config.js');
+const { request } = require('./utils.js');
+const getExtraReportInfo = () => ({ captcha_appid: appId });
 
 /**
  * 获取配置在云函数的短信appid
@@ -42,18 +42,18 @@ function getAppId() {
 async function describeCaptchaResult(params) {
   // 配置校验
   if (!appId || !appSecretKey) {
-    throw new Error("请在云函数CAPTCHA模块中配置appId和AppSecretKey");
+    throw new Error('请在云函数CAPTCHA模块中配置appId和AppSecretKey');
   }
   const auth = uniCloud.auth();
   const userIp = auth.getClientIP();
   // 删除掉云函数带上来的额外参数
   delete params.uniIdToken;
   // 调用核查验证码票据接口
-  const result = await request("DescribeCaptchaResult", {
+  const result = await request('DescribeCaptchaResult', {
     AppSecretKey: appSecretKey,
     CaptchaAppId: Number(appId),
     UserIp: userIp,
-    ...params,
+    ...params
   });
   return result;
 }

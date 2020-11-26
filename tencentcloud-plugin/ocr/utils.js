@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
-const axios = require("axios");
-const { region } = require("./config");
-const { sign } = require("../common");
+const axios = require('axios');
+const { region } = require('./config');
+const { sign } = require('../common');
 
 /**
  * 请求腾讯云OCR接口公共方法
@@ -27,19 +27,19 @@ const { sign } = require("../common");
  * @returns {object} API返回的有效数据
  */
 async function request(action, payload) {
-  const [timestamp, authorization] = sign("ocr", JSON.stringify(payload));
+  const [timestamp, authorization] = sign('ocr', JSON.stringify(payload));
   const options = {
-    url: "https://ocr.tencentcloudapi.com",
-    method: "POST",
+    url: 'https://ocr.tencentcloudapi.com',
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "X-TC-Action": action,
-      [region ? "X-TC-Region" : ""]: region,
-      "X-TC-Version": "2018-11-19",
-      "X-TC-Timestamp": timestamp,
-      Authorization: authorization,
+      'Content-Type': 'application/json',
+      'X-TC-Action': action,
+      [region ? 'X-TC-Region' : '']: region,
+      'X-TC-Version': '2018-11-19',
+      'X-TC-Timestamp': timestamp,
+      Authorization: authorization
     },
-    data: payload,
+    data: payload
   };
   const response = await axios(options);
   const { status, statusText, data } = response;

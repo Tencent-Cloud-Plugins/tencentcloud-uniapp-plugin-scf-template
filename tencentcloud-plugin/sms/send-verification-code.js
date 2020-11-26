@@ -53,13 +53,13 @@ async function sendVerificationCode({ phoneNumber }) {
     phoneNumber,
     verificationCode,
     createTime: new Date().getTime(),
-    checkCounter: 0,
+    checkCounter: 0
   });
   // 发送短信
   const { SendStatusSet } = await sendSMS({
     phoneNumbers: [phoneNumber],
     templateId: verificationCodeTemplateId,
-    templateParams: [verificationCode],
+    templateParams: [verificationCode]
   });
   if (SendStatusSet[0].Code !== 'Ok') {
     throw new Error(SendStatusSet[0].Message);

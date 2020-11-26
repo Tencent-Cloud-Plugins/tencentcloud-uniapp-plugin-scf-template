@@ -23,5 +23,5 @@ module.exports = {
   textModeration,
   listTextSample,
   createTextSample,
-  deleteTextSample,
+  deleteTextSample
 };

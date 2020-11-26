@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-"use strict";
-const { request } = require("./utils.js");
+'use strict';
+const { request } = require('./utils.js');
 
 /**
  * 获取图像识别结果
@@ -28,10 +28,10 @@ const { request } = require("./utils.js");
  */
 async function getTiiaResult(params) {
   if (!params.name) {
-    throw new Error("缺少API Action参数");
+    throw new Error('缺少API Action参数');
   }
   if (!(params.payload.ImageBase64 || params.payload.ImageUrl)) {
-    throw new Error("ImageUrl 和 ImageBase64 必须有一个不为空");
+    throw new Error('ImageUrl 和 ImageBase64 必须有一个不为空');
   }
   // 调用图像识别接口
   try {

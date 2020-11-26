@@ -51,16 +51,24 @@ async function checkVerificationCode({ phoneNumber, verificationCode }) {
   const db = uniCloud.database();
   const verificationCodes = db.collection(verificationCodeCollection);
   // 清理过期验证码记录
-  const result = await verificationCodes.where({
-    createTime: db.command.lt(new Date().getTime() - verificationCodeExpires * 60 * 1000),
-  }).remove();
+  const result = await verificationCodes
+    .where({
+      createTime: db.command.lt(new Date().getTime() - verificationCodeExpires * 60 * 1000)
+    })
+    .remove();
   if (result.deleted) {
     console.log(`已自动清理掉${result.deleted}条过期记录`);
   }
   // 验证码查询并核对
-  const { data: [record] } = await verificationCodes.where({
-    phoneNumber,
-  }).orderBy('createTime', 'desc').limit(1).get();
+  const {
+    data: [record]
+  } = await verificationCodes
+    .where({
+      phoneNumber
+    })
+    .orderBy('createTime', 'desc')
+    .limit(1)
+    .get();
   if (!record) {
     throw new Error('验证码不正确');
   }
@@ -71,15 +79,17 @@ async function checkVerificationCode({ phoneNumber, verificationCode }) {
   // 增加验证码核验次数
   if (record.verificationCode !== verificationCode) {
     await verificationCodes.doc(record._id).update({
-      checkCounter: record.checkCounter + 1,
+      checkCounter: record.checkCounter + 1
     });
     throw new Error('验证码不正确');
   }
   // 验证成功后异步删除验证码记录
   try {
-    verificationCodes.where({
-      phoneNumber,
-    }).remove();
+    verificationCodes
+      .where({
+        phoneNumber
+      })
+      .remove();
   } catch (error) {
     console.log(error);
   }

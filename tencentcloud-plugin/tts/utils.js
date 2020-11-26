@@ -21,20 +21,23 @@ const { region } = require('./config');
 const { sign } = require('../common');
 
 /**
- * 请求腾讯云图像识别接口公共方法
+ * 请求腾讯云基础语音合成公共方法
  * @param {string} action - 接口请求action
  * @param {object} payload - 接口请求体
  * @returns {object} API返回的有效数据
  */
 async function request(action, payload) {
-  const [timestamp, authorization] = sign('tiia', JSON.stringify(payload));
+  if (!region) {
+    throw new Error('请在云函数TTS模块中配置region');
+  }
+  const [timestamp, authorization] = sign('tts', JSON.stringify(payload));
   const options = {
-    url: 'https://tiia.tencentcloudapi.com',
+    url: 'https://tts.tencentcloudapi.com',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'X-TC-Action': action,
-      'X-TC-Version': '2019-05-29',
+      'X-TC-Version': '2019-08-23',
       'X-TC-Timestamp': timestamp,
       'X-TC-Region': region,
       Authorization: authorization

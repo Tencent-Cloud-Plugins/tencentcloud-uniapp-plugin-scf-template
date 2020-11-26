@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
 // 腾讯云uni-app移动解析插件依赖云函数的配置
 module.exports = {
   encId: '', // HTTPDNS企业版本授权ID
-  encKey: '', // HTTPDNS企业版本加密功能的密钥
+  encKey: '' // HTTPDNS企业版本加密功能的密钥
 };

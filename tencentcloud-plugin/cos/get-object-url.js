@@ -46,14 +46,17 @@ function getObjectURL({ key }) {
   const httpStringHash = crypto.createHash('sha1').update(httpString).digest('hex');
   const stringToSign = `sha1\n${keyTime}\n${httpStringHash}\n`;
   const signature = crypto.createHmac('sha1', signKey).update(stringToSign).digest('hex');
-  return `https://${bucket}.cos.${region}.myqcloud.com/${key}`
+  return (
+    /* prettier-ignore */
+    `https://${bucket}.cos.${region}.myqcloud.com/${key}`
     + `?q-sign-algorithm=sha1`
     + `&q-ak=${secretId}`
     + `&q-sign-time=${keyTime}`
     + `&q-key-time=${keyTime}`
     + `&q-header-list=`
     + `&q-url-param-list=`
-    + `&q-signature=${signature}`;
+    + `&q-signature=${signature}`
+  );
 }
 
 module.exports = getObjectURL;

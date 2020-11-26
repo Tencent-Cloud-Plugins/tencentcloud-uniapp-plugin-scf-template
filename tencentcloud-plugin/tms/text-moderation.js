@@ -31,7 +31,7 @@ async function textModeration({ content }) {
   }
   // 调用腾讯云查询接口
   const { Data } = await request('TextModeration', {
-    Content: Buffer.from(content).toString('base64'),
+    Content: Buffer.from(content).toString('base64')
   });
   return Data;
 }

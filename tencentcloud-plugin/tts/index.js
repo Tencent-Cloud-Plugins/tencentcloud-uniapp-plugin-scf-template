@@ -16,18 +16,22 @@
 
 'use strict';
 
-const { appId } = require('./config');
+const { request } = require('./utils');
 
-const sendSMS = require('./send-sms');
-const sendVerificationCode = require('./send-verification-code');
-const checkVerificationCode = require('./check-verification-code');
-const getPackagesStatistics = require('./get-packages-statistics');
-const getExtraReportInfo = () => ({ sms_appid: appId });
+/**
+ * 获取基础语音合成结果
+ * 更多信息请访问 https://cloud.tencent.com/document/product/1073/37995
+ * @param {object} params - 参数包装对象
+ * @param {object} param - 语音合成接口相关参数
+ * @return {Promise<object>} 评测信息
+ */
+async function getTtsResult({ param }) {
+  // 调用腾讯云基础语音合成接口
+  const result = await request('TextToVoice', param);
+
+  return result;
+}
 
 module.exports = {
-  sendSMS,
-  sendVerificationCode,
-  checkVerificationCode,
-  getPackagesStatistics,
-  getExtraReportInfo
+  getTtsResult
 };

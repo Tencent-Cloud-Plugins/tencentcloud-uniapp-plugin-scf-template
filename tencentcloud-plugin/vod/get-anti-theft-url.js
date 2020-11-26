@@ -35,7 +35,7 @@ function getAntiTheftURL({ mediaUrl }) {
     throw new Error('请在云函数VOD模块中配置有效的antiTheftExpires');
   }
   // 生成包含签名的url
-  const result = new RegExp('^https?:\/\/[^/]*(.*\/)[^/]*$').exec(mediaUrl);
+  const result = new RegExp('^https?://[^/]*(.*/)[^/]*$').exec(mediaUrl);
   if (!result) {
     throw new Error('无效的媒体文件Url');
   }

@@ -33,10 +33,10 @@ async function request(action, payload) {
       'X-TC-Action': action,
       'X-TC-Version': '2018-07-17',
       'X-TC-Timestamp': timestamp,
-      'Authorization': authorization,
+      Authorization: authorization
     },
     data: payload,
-    dataType: 'json',
+    dataType: 'json'
   });
   const { status, statusMessage, data } = res;
   if (status !== 200) {

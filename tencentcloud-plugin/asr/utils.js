@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
-const axios = require("axios");
-const { sign } = require("../common");
+const axios = require('axios');
+const { sign } = require('../common');
 /**
  * 请求腾讯云语音识别接口公共方法
  * @param {string} action - 接口请求action
@@ -25,19 +25,19 @@ const { sign } = require("../common");
  * @returns {object} API返回的有效数据
  */
 async function request(action, payload) {
-  const [timestamp, authorization] = sign("asr", JSON.stringify(payload));
+  const [timestamp, authorization] = sign('asr', JSON.stringify(payload));
 
   const options = {
-    url: "https://asr.tencentcloudapi.com",
-    method: "POST",
+    url: 'https://asr.tencentcloudapi.com',
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "X-TC-Action": action,
-      "X-TC-Version": "2019-06-14",
-      "X-TC-Timestamp": timestamp,
-      Authorization: authorization,
+      'Content-Type': 'application/json',
+      'X-TC-Action': action,
+      'X-TC-Version': '2019-06-14',
+      'X-TC-Timestamp': timestamp,
+      Authorization: authorization
     },
-    data: payload,
+    data: payload
   };
   const response = await axios(options);
   const { status, statusText, data } = response;
@@ -51,5 +51,5 @@ async function request(action, payload) {
 }
 
 module.exports = {
-  request,
+  request
 };

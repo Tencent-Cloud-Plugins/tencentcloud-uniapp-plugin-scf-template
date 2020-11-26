@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
 // 腾讯云uni-app 图像识别插件依赖云函数的配置
 // 可用地域列表参数
@@ -22,5 +22,5 @@
 // 华南地区(广州)	ap-guangzhou
 // 华东地区(上海)	ap-shanghai
 module.exports = {
-  region: "ap-guangzhou", // 地域列表
+  region: 'ap-guangzhou' // 地域列表
 };

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-"use strict";
-const { request } = require("./utils.js");
-const RealTime = require("./asrRealtimeSdk");
+'use strict';
+const { request } = require('./utils.js');
+const RealTime = require('./asrRealtimeSdk');
 /**
  * 获取语音识别相关接口
  * @param {object} params - 参数包装对象
@@ -26,7 +26,7 @@ const RealTime = require("./asrRealtimeSdk");
  */
 async function getAsrResult(params) {
   if (!params.name) {
-    throw new Error("缺少API Action参数");
+    throw new Error('缺少API Action参数');
   }
   try {
     const result = await request(params.name, params.payload);
@@ -45,9 +45,9 @@ async function getAsrResult(params) {
  */
 async function realTimeVoice({ data: voiceData, params }) {
   try {
-    //创建调用实例
+    // 创建调用实例
     const asrReq = new RealTime(params);
-    let chunk = Buffer.from(voiceData, "base64");
+    const chunk = Buffer.from(voiceData, 'base64');
     const result = await asrReq.sendRequest(chunk);
     return result;
   } catch (e) {
@@ -57,5 +57,5 @@ async function realTimeVoice({ data: voiceData, params }) {
 
 module.exports = {
   getAsrResult,
-  realTimeVoice,
+  realTimeVoice
 };

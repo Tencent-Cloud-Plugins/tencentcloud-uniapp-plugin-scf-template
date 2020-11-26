@@ -37,10 +37,10 @@ function getUploadSignature() {
   // 生成签名信息
   const current = Math.floor(new Date().getTime() / 1000);
   const args = {
-      secretId,
-      currentTimeStamp: current,
-      expireTime: current + uploadExpires,
-      random: Math.round(Math.random() * Math.pow(2, 32)),
+    secretId,
+    currentTimeStamp: current,
+    expireTime: current + uploadExpires,
+    random: Math.round(Math.random() * Math.pow(2, 32))
   };
   const orignal = querystring.stringify(args);
   const orignalBuffer = new Buffer(orignal, 'utf8');

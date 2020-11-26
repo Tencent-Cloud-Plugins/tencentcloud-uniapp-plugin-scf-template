@@ -23,5 +23,5 @@ module.exports = {
   imageModeration,
   listImageSample,
   createImageSample,
-  deleteImageSample,
+  deleteImageSample
 };

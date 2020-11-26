@@ -30,6 +30,7 @@ const modules = {
   ASR: require('./asr'),
   SOE: require('./soe'),
   HTTPDNS: require('./httpdns'),
+  TTS: require('./tts')
 };
 
 /**
@@ -45,7 +46,7 @@ exports.main = async (event) => {
     throw new Error(`${module}.${action}不存在`);
   }
   // 数据统计
-  const getExtraInfoMethod = modules[module]['getExtraReportInfo'];
+  const getExtraInfoMethod = modules[module].getExtraReportInfo;
   const extraInfo = getExtraInfoMethod ? getExtraInfoMethod() : {};
   report(module, extraInfo);
   // 调用相应的模块

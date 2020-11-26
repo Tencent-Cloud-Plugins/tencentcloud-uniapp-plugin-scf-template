@@ -30,11 +30,11 @@ async function listImageSample({ limit = 20, offset = 0 }) {
   // 调用腾讯云接口
   const { FileSampleSet, TotalCount } = await request('DescribeFileSample', {
     Limit: limit,
-    Offset: offset,
+    Offset: offset
   });
   return {
     FileSampleSet,
-    TotalCount,
+    TotalCount
   };
 }
 
@@ -55,14 +55,16 @@ async function createImageSample({ fileName, fileUrl, fileMd5, evilType, label }
   }
   // 调用腾讯云接口
   const { Progress } = await request('CreateFileSample', {
-    Contents: [{
-      FileName: fileName,
-      FileUrl: fileUrl,
-      FileMd5: fileMd5,
-    }],
+    Contents: [
+      {
+        FileName: fileName,
+        FileUrl: fileUrl,
+        FileMd5: fileMd5
+      }
+    ],
     EvilType: evilType,
     Label: label,
-    FileType: 'image',
+    FileType: 'image'
   });
   return Progress;
 }
@@ -80,7 +82,7 @@ async function deleteImageSample({ ids }) {
   }
   // 调用腾讯云接口
   const { Progress } = await request('DeleteFileSample', {
-    Ids: ids,
+    Ids: ids
   });
   return Progress;
 }
@@ -88,5 +90,5 @@ async function deleteImageSample({ ids }) {
 module.exports = {
   listImageSample,
   createImageSample,
-  deleteImageSample,
+  deleteImageSample
 };

@@ -21,12 +21,12 @@ const { bucket, region } = require('./config');
 const getObjectURL = require('./get-object-url');
 const signPostObjectAPI = require('./sign-post-object-api');
 const getExtraReportInfo = () => ({
-  'cos_bucket': bucket,
-  'cos_region': region,
+  cos_bucket: bucket,
+  cos_region: region
 });
 
 module.exports = {
   getObjectURL,
   signPostObjectAPI,
-  getExtraReportInfo,
+  getExtraReportInfo
 };

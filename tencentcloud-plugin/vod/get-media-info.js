@@ -32,13 +32,15 @@ async function getUploadSignature({ mediaId }) {
     throw new Error('待查询媒体ID不能为空');
   }
   // 调用腾讯云查询接口
-  const { MediaInfoSet: [mediaInfo] } = await request('DescribeMediaInfos', {
-    FileIds: [mediaId],
+  const {
+    MediaInfoSet: [mediaInfo]
+  } = await request('DescribeMediaInfos', {
+    FileIds: [mediaId]
   });
   // 如果有配置antiTheftKey则自动生成带签名的url
   if (mediaInfo && antiTheftKey) {
     mediaInfo.BasicInfo.AntiTheftUrl = getAntiTheftURL({
-      mediaUrl: mediaInfo.BasicInfo.MediaUrl,
+      mediaUrl: mediaInfo.BasicInfo.MediaUrl
     });
   }
   return mediaInfo;

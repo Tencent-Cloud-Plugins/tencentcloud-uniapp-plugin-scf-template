@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
-const getOcrResult = require("./get-ocr-result");
+const getOcrResult = require('./get-ocr-result');
 
 module.exports = {
-  getOcrResult,
+  getOcrResult
 };

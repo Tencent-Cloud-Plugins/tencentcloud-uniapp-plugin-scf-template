@@ -20,5 +20,5 @@
 module.exports = {
   bucket: '', // COS存储桶名称
   region: '', // COS地域
-  expires: 60, // 签名有效期(单位：秒)
+  expires: 60 // 签名有效期(单位：秒)
 };

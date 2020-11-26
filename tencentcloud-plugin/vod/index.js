@@ -23,5 +23,5 @@ const getAntiTheftURL = require('./get-anti-theft-url.js');
 module.exports = {
   getUploadSignature,
   getMediaInfo,
-  getAntiTheftURL,
+  getAntiTheftURL
 };

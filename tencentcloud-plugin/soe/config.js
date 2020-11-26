@@ -17,5 +17,4 @@
 'use strict';
 
 // 腾讯云uni-app口语评测SOE插件依赖云函数的配置
-module.exports = {
-};
+module.exports = {};

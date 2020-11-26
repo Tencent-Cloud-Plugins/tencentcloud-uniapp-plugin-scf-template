@@ -16,18 +16,14 @@
 
 'use strict';
 
-const { appId } = require('./config');
-
-const sendSMS = require('./send-sms');
-const sendVerificationCode = require('./send-verification-code');
-const checkVerificationCode = require('./check-verification-code');
-const getPackagesStatistics = require('./get-packages-statistics');
-const getExtraReportInfo = () => ({ sms_appid: appId });
-
+// 腾讯云uni-app 语音合成插件依赖云函数的配置
+// 可用地域列表参数
+// 华北地区(北京)	ap-beijing
+// 华南地区(广州)	ap-guangzhou
+// 华东地区(上海)	ap-shanghai
+// 华东地区(南京) ap-nanjing
+// 西南地区(成都)	ap-chengdu
+// 西南地区(重庆) ap-chongqing
 module.exports = {
-  sendSMS,
-  sendVerificationCode,
-  checkVerificationCode,
-  getPackagesStatistics,
-  getExtraReportInfo
+  region: 'ap-guangzhou' // 地域列表
 };

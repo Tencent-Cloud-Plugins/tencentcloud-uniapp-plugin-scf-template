@@ -38,7 +38,7 @@ async function sendSMS({ phoneNumbers, templateId, templateParams }) {
     Sign: appSign,
     PhoneNumberSet: phoneNumbers,
     TemplateID: templateId,
-    TemplateParamSet: templateParams,
+    TemplateParamSet: templateParams
   });
   return result;
 }

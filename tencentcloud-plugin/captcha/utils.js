@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
-const axios = require("axios");
-const { sign } = require("../common");
+const axios = require('axios');
+const { sign } = require('../common');
 
 /**
  * 请求腾讯云验证码接口公共方法
@@ -26,18 +26,18 @@ const { sign } = require("../common");
  * @returns {object} API返回的有效数据
  */
 async function request(action, payload) {
-  const [timestamp, authorization] = sign("captcha", JSON.stringify(payload));
+  const [timestamp, authorization] = sign('captcha', JSON.stringify(payload));
   const options = {
-    url: "https://captcha.tencentcloudapi.com",
-    method: "POST",
+    url: 'https://captcha.tencentcloudapi.com',
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "X-TC-Action": action,
-      "X-TC-Version": "2019-07-22",
-      "X-TC-Timestamp": timestamp,
-      Authorization: authorization,
+      'Content-Type': 'application/json',
+      'X-TC-Action': action,
+      'X-TC-Version': '2019-07-22',
+      'X-TC-Timestamp': timestamp,
+      Authorization: authorization
     },
-    data: payload,
+    data: payload
   };
   const response = await axios(options);
   const { status, statusText, data } = response;

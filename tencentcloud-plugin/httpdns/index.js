@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 const crypto = require('crypto');
-const { encId, encKey } = require("./config.js");
+const { encId, encKey } = require('./config.js');
 
 /**
  * 核查验证码票据结果
@@ -27,35 +27,29 @@ const { encId, encKey } = require("./config.js");
  * @param {number?} params.clientip - 是否返回用户公网出口IP 1:返回
  * @param {boolean} param.isEnc - 是否加密 true(调用企业版API): 加密 false:不加密(调用免费版API)
  */
-async function describeDnsResult({
-  domainName,
-  ip,
-  ttl,
-  clientip,
-  isEnc
-}) {
+async function describeDnsResult({ domainName, ip, ttl, clientip, isEnc }) {
   // 配置校验
   if (isEnc && (!encId || !encKey)) {
-    throw new Error("请在云函数HTTPDNS模块中配置encId和encKey");
+    throw new Error('请在云函数HTTPDNS模块中配置encId和encKey');
   }
   // 如果不传入ip，就取客户端ip
-  if(!ip) {
+  if (!ip) {
     const auth = uniCloud.auth();
     ip = auth.getClientIP();
   }
   // 企业版API调用需加密
-  if(isEnc) {
+  if (isEnc) {
     domainName = encrypt(domainName);
     ip = encrypt(ip);
   }
 
   const params = {
     dn: domainName,
-    ip: ip,
-    ttl: ttl,
-    clientip: clientip,
+    ip,
+    ttl,
+    clientip,
     id: isEnc ? encId : undefined
-  }
+  };
   const { status, statusText, data } = await uniCloud.httpclient.request('http://119.29.29.29/d', {
     method: 'GET',
     dataType: 'text',
@@ -68,7 +62,7 @@ async function describeDnsResult({
   if (!data) {
     throw new Error('域名解析失败');
   }
-  if(isEnc) {
+  if (isEnc) {
     return decrypt(data);
   }
 
@@ -81,8 +75,8 @@ async function describeDnsResult({
  * @return {string} 加密数据
  */
 function encrypt(encString) {
-  try{
-    if(!encString) {
+  try {
+    if (!encString) {
       throw new Error('请传入待加密数据');
     }
     const iv = Buffer.alloc(0);
@@ -90,8 +84,8 @@ function encrypt(encString) {
     let encrypText = cipher.update(encString, 'utf8', 'hex');
     encrypText += cipher.final('hex');
     return encrypText;
-  }catch(e){
-    throw(new Error('加密失败'));
+  } catch (e) {
+    throw new Error('加密失败');
   }
 }
 
@@ -101,8 +95,8 @@ function encrypt(encString) {
  * @return {string}  解密数据
  */
 function decrypt(decString) {
-  try{
-    if(!decString) {
+  try {
+    if (!decString) {
       throw new Error('请传入待解密数据');
     }
     const iv = Buffer.alloc(0);
@@ -110,11 +104,11 @@ function decrypt(decString) {
     let decryptText = cipher.update(decString, 'hex', 'utf8');
     decryptText += cipher.final('utf8');
     return decryptText;
-  }catch(e){
-    throw(new Error('解密失败'));
+  } catch (e) {
+    throw new Error('解密失败');
   }
 }
 
 module.exports = {
-  describeDnsResult,
-}
+  describeDnsResult
+};

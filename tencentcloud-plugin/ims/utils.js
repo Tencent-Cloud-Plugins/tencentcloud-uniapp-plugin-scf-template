@@ -34,10 +34,10 @@ async function request(action, payload) {
       'X-TC-Region': 'ap-guangzhou',
       'X-TC-Version': '2019-03-21',
       'X-TC-Timestamp': timestamp,
-      'Authorization': authorization,
+      Authorization: authorization
     },
     data: payload,
-    dataType: 'json',
+    dataType: 'json'
   });
   const { status, statusMessage, data } = res;
   if (status !== 200) {

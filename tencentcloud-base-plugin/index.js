@@ -45,7 +45,9 @@ exports.main = async ({ secretId, secretKey, module, extraInfo }) => {
   }
   const collection = db.collection('tencentcloud_plugin_report');
   // 查找出第一条记录
-  let { data: [record] } = await collection.limit(1).get();
+  let {
+    data: [record]
+  } = await collection.limit(1).get();
   // 如果为空则创建一条记录，该记录的主键_id作为数据上报的siteId使用，不同模块的上报共用一个siteId
   if (!record) {
     const { id } = await collection.add({});
@@ -61,24 +63,24 @@ exports.main = async ({ secretId, secretKey, module, extraInfo }) => {
   await uniCloud.httpclient.request('https://openapp.qq.com/api/public/index.php/upload', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     data: {
-      'action': 'activate',
-      'plugin_type': module.toLowerCase(),
-      'data': {
-        'site_id': `uniapp_${record._id}`,
-        'site_app': 'uni-app',
-        'site_url': 'uni-app',
-        'uin': userUin,
-        'cust_sec_on': 1,
-        'others': JSON.stringify(extraInfo),
-      },
-    },
+      action: 'activate',
+      plugin_type: module.toLowerCase(),
+      data: {
+        site_id: `uniapp_${record._id}`,
+        site_app: 'uni-app',
+        site_url: 'uni-app',
+        uin: userUin,
+        cust_sec_on: 1,
+        others: JSON.stringify(extraInfo)
+      }
+    }
   });
   // 保存上报标识，之后不再上报
   await collection.doc(record._id).update({
-    [module]: JSON.stringify(extraInfo),
+    [module]: JSON.stringify(extraInfo)
   });
 };
 
@@ -91,7 +93,7 @@ async function getUserUin(secretId, secretKey) {
   const dateString = currentDate.toISOString().substr(0, 10);
   const requestStringHash = crypto.createHash('sha256').update(requestString).digest('hex');
   const stringToSign = `TC3-HMAC-SHA256\n${timestamp}\n${dateString}/ms/tc3_request\n${requestStringHash}`;
-  const secretDate = crypto.createHmac('sha256', 'TC3' + secretKey).update(dateString).digest();
+  const secretDate = crypto.createHmac('sha256', `TC3${secretKey}`).update(dateString).digest();
   const secretService = crypto.createHmac('sha256', secretDate).update('ms').digest();
   const secretSigning = crypto.createHmac('sha256', secretService).update('tc3_request').digest();
   const signature = crypto.createHmac('sha256', secretSigning).update(stringToSign).digest('hex');
@@ -103,10 +105,10 @@ async function getUserUin(secretId, secretKey) {
       'X-TC-Action': 'DescribeUserBaseInfoInstance',
       'X-TC-Version': '2018-04-08',
       'X-TC-Timestamp': timestamp,
-      'Authorization': authorization,
+      Authorization: authorization
     },
     data: {},
-    dataType: 'json',
+    dataType: 'json'
   });
   const { status, statusMessage, data } = res;
   if (status !== 200) {

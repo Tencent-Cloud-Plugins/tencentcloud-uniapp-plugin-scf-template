@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const axios = require("axios");
-const crypto = require("crypto");
-const { secretId, secretKey, appId } = require("../config");
+const axios = require('axios');
+const crypto = require('crypto');
+const { secretId, secretKey, appId } = require('../config');
 
 class RealTime {
   /**
@@ -33,30 +33,30 @@ class RealTime {
    * @return {string} 签名后返回的数组
    */
   sign(signStr) {
-    let hash = crypto.createHmac("sha1", secretKey || "");
-    let sign = hash.update(Buffer.from(signStr, "utf8")).digest("base64");
+    const hash = crypto.createHmac('sha1', secretKey || '');
+    const sign = hash.update(Buffer.from(signStr, 'utf8')).digest('base64');
     return sign;
   }
 
   /**
    * 将请求的参数转为stirng类型
    * @param {object} params
-   * @return {string} 
+   * @return {string}
    */
   formatSignString(params) {
-    let strParam = "";
-    let signStr = "POSTasr.cloud.tencent.com/asr/v1/";
+    let strParam = '';
+    let signStr = 'POSTasr.cloud.tencent.com/asr/v1/';
     if (appId) {
       signStr += appId;
     }
-    let keys = Object.keys(params);
+    const keys = Object.keys(params);
     keys.sort();
-    for (let k in keys) {
+    for (const k in keys) {
       if (Object.prototype.hasOwnProperty.call(keys, k)) {
-        strParam += "&" + keys[k] + "=" + params[keys[k]];
+        strParam += `&${keys[k]}=${params[keys[k]]}`;
       }
     }
-    let strSign = signStr + "?" + strParam.slice(1);
+    const strSign = `${signStr}?${strParam.slice(1)}`;
     return strSign;
   }
 
@@ -64,38 +64,31 @@ class RealTime {
    * 请求参数组装
    */
   createQuery() {
-    let params = {};
-    let time = new Date().getTime();
+    const params = {};
+    const time = new Date().getTime();
 
-    params["projectid"] = 0;
-    params["secretid"] = secretId;
-    params["sub_service_type"] = 1;
-    params["engine_model_type"] = this.query.engine_model_type;
-    params["res_type"] = this.query.res_type;
-    params["voice_format"] = this.query.voice_format;
-    params["source"] = 0;
-    params["timestamp"] = "" + Math.round(time / 1000);
-    params["expired"] = Math.round(time / 1000) + 24 * 60 * 60;
-    params["nonce"] = Math.round(time / 100000);
-    params["voice_id"] = this.query.voice_id;
-    params["end"] = this.query.end;
-    params["seq"] = this.query.seq;
+    params.projectid = 0;
+    params.secretid = secretId;
+    params.sub_service_type = 1;
+    params.engine_model_type = this.query.engine_model_type;
+    params.res_type = this.query.res_type;
+    params.voice_format = this.query.voice_format;
+    params.source = 0;
+    params.timestamp = `${Math.round(time / 1000)}`;
+    params.expired = Math.round(time / 1000) + 24 * 60 * 60;
+    params.nonce = Math.round(time / 100000);
+    params.voice_id = this.query.voice_id;
+    params.end = this.query.end;
+    params.seq = this.query.seq;
 
     // 非必填参数
-    this.query.hasOwnProperty("hotword_id") &&
-      (params["hotword_id"] = this.query.hotword_id);
-    this.query.hasOwnProperty("result_text_format") &&
-      (params["result_text_format"] = this.query.result_text_format);
-    this.query.hasOwnProperty("needvad") &&
-      (params["needvad"] = this.query.needvad);
-    this.query.hasOwnProperty("filter_dirty") &&
-      (params["filter_dirty"] = this.query.filter_dirty);
-    this.query.hasOwnProperty("filter_modal") &&
-      (params["filter_modal"] = this.query.filter_modal);
-    this.query.hasOwnProperty("filter_punc") &&
-      (params["filter_punc"] = this.query.filter_punc);
-    this.query.hasOwnProperty("convert_num_mode") &&
-      (params["convert_num_mode"] = this.query.convert_num_mode);
+    this.query.hasOwnProperty('hotword_id') && (params.hotword_id = this.query.hotword_id);
+    this.query.hasOwnProperty('result_text_format') && (params.result_text_format = this.query.result_text_format);
+    this.query.hasOwnProperty('needvad') && (params.needvad = this.query.needvad);
+    this.query.hasOwnProperty('filter_dirty') && (params.filter_dirty = this.query.filter_dirty);
+    this.query.hasOwnProperty('filter_modal') && (params.filter_modal = this.query.filter_modal);
+    this.query.hasOwnProperty('filter_punc') && (params.filter_punc = this.query.filter_punc);
+    this.query.hasOwnProperty('convert_num_mode') && (params.convert_num_mode = this.query.convert_num_mode);
 
     return params;
   }
@@ -109,10 +102,10 @@ class RealTime {
    */
   async doRequest(url, chunk, headers) {
     const options = {
-      url: url,
-      method: "POST",
-      headers: headers,
-      data: chunk,
+      url,
+      method: 'POST',
+      headers,
+      data: chunk
     };
     const response = await axios(options);
     const { status, statusText, data } = response;
@@ -132,21 +125,21 @@ class RealTime {
    */
   sendRequest(chunk) {
     if (chunk.size === 0) {
-      return "";
+      return '';
     }
-    let query = this.createQuery();
-    let signStr = this.formatSignString(query);
-    let autho = this.sign(signStr);
-    let datalen = chunk.length;
+    const query = this.createQuery();
+    const signStr = this.formatSignString(query);
+    const autho = this.sign(signStr);
+    const datalen = chunk.length;
 
-    let headers = {};
-    headers["Authorization"] = autho;
-    headers["Content-Length"] = datalen;
-    headers["Content-Type"] = "application/octet-stream";
-    headers["Host"] = "asr.cloud.tencent.com";
+    const headers = {};
+    headers.Authorization = autho;
+    headers['Content-Length'] = datalen;
+    headers['Content-Type'] = 'application/octet-stream';
+    headers.Host = 'asr.cloud.tencent.com';
 
-    let reqUrl = "http://" + signStr.substring(4, signStr.length);
-    let res = this.doRequest(reqUrl, chunk, headers);
+    const reqUrl = `http://${signStr.substring(4, signStr.length)}`;
+    const res = this.doRequest(reqUrl, chunk, headers);
     return res;
   }
 }

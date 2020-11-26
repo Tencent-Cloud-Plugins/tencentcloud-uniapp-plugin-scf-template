@@ -35,19 +35,14 @@ function getParams(param) {
     WorkMode: param.workMode,
     EvalMode: param.evalMode,
     ScoreCoeff: param.scoreCoeff
-  }
+  };
 
   // 非必填参数
-  param.hasOwnProperty("soeAppId") &&
-    (paramsData["SoeAppId"] = param.soeAppId);
-  param.hasOwnProperty("storageMode") &&
-    (paramsData["StorageMode"] = param.storageMode);
-  param.hasOwnProperty("sentenceInfoEnabled") &&
-    (paramsData["SentenceInfoEnabled"] = param.sentenceInfoEnabled);
-  param.hasOwnProperty("serverType") &&
-    (paramsData["ServerType"] = param.serverType);
-  param.hasOwnProperty("textMode") &&
-    (paramsData["TextMode"] = param.textMode);
+  param.hasOwnProperty('soeAppId') && (paramsData.SoeAppId = param.soeAppId);
+  param.hasOwnProperty('storageMode') && (paramsData.StorageMode = param.storageMode);
+  param.hasOwnProperty('sentenceInfoEnabled') && (paramsData.SentenceInfoEnabled = param.sentenceInfoEnabled);
+  param.hasOwnProperty('serverType') && (paramsData.ServerType = param.serverType);
+  param.hasOwnProperty('textMode') && (paramsData.TextMode = param.textMode);
 
   return paramsData;
 }

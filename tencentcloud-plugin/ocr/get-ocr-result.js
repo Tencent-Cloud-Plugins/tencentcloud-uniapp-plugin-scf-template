@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-"use strict";
+'use strict';
 
-const { request } = require("./utils");
+const { request } = require('./utils');
 
 /**
  * 获取OCR识别结果
@@ -29,10 +29,10 @@ const { request } = require("./utils");
  */
 async function getOcrResult(params) {
   if (!params.name) {
-    throw new Error("缺少API Action参数");
+    throw new Error('缺少API Action参数');
   }
   if (!(params.payload.ImageBase64 || params.payload.ImageUrl)) {
-    throw new Error("ImageUrl 和 ImageBase64 必须有一个不为空");
+    throw new Error('ImageUrl 和 ImageBase64 必须有一个不为空');
   }
   // 调用OCR识别接口
   try {

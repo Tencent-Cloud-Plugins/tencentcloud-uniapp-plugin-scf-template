@@ -33,7 +33,7 @@ async function imageModeration({ content }) {
   // 调用腾讯云查询接口
   const { Data } = await request('ImageModeration', {
     FileContent: isUrl ? undefined : content,
-    FileUrl: isUrl ? content : undefined,
+    FileUrl: isUrl ? content : undefined
   });
   return Data;
 }

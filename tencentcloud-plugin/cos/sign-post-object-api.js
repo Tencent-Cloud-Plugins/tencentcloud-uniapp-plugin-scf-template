@@ -42,11 +42,7 @@ function signPostObjectAPI() {
   const keyTime = `${Math.floor(currentDate.getTime() / 1000)};${Math.floor(expirationDate.getTime() / 1000)}`;
   const policy = JSON.stringify({
     expiration: expirationDate.toISOString(),
-    conditions: [
-      { 'q-sign-algorithm': 'sha1' },
-      { 'q-ak': secretId },
-      { 'q-sign-time': keyTime },
-    ],
+    conditions: [{ 'q-sign-algorithm': 'sha1' }, { 'q-ak': secretId }, { 'q-sign-time': keyTime }]
   });
   const signKey = crypto.createHmac('sha1', secretKey).update(keyTime).digest('hex');
   const stringToSign = crypto.createHash('sha1').update(policy).digest('hex');
@@ -57,7 +53,7 @@ function signPostObjectAPI() {
     ak: secretId,
     keyTime,
     signature,
-    policy: Buffer.from(policy).toString('base64'),
+    policy: Buffer.from(policy).toString('base64')
   };
 }
 

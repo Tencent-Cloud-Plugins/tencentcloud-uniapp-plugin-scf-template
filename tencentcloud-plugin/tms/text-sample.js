@@ -30,11 +30,11 @@ async function listTextSample({ limit = 20, offset = 0 }) {
   // 调用腾讯云接口
   const { TextSampleSet, TotalCount } = await request('DescribeTextSample', {
     Limit: limit,
-    Offset: offset,
+    Offset: offset
   });
   return {
     TextSampleSet,
-    TotalCount,
+    TotalCount
   };
 }
 
@@ -55,7 +55,7 @@ async function createTextSample({ contents, evilType, label }) {
   const { Progress } = await request('CreateTextSample', {
     Contents: contents,
     EvilType: evilType,
-    Label: label,
+    Label: label
   });
   return Progress;
 }
@@ -73,7 +73,7 @@ async function deleteTextSample({ ids }) {
   }
   // 调用腾讯云接口
   const { Progress } = await request('DeleteTextSample', {
-    Ids: ids,
+    Ids: ids
   });
   return Progress;
 }
@@ -81,5 +81,5 @@ async function deleteTextSample({ ids }) {
 module.exports = {
   listTextSample,
   createTextSample,
-  deleteTextSample,
+  deleteTextSample
 };

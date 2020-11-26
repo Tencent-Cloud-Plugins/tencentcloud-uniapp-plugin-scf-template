@@ -34,7 +34,7 @@ async function getPackagesStatistics({ limit = 10 }) {
   const result = await request('SmsPackagesStatistics', {
     SmsSdkAppid: appId,
     Limit: limit,
-    Offset: 0,
+    Offset: 0
   });
   return result;
 }
