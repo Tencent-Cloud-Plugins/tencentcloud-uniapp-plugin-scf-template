@@ -30,7 +30,8 @@ const modules = {
   ASR: require('./asr'),
   SOE: require('./soe'),
   HTTPDNS: require('./httpdns'),
-  TTS: require('./tts')
+  TTS: require('./tts'),
+  TMT: require('./tmt')
 };
 
 /**
