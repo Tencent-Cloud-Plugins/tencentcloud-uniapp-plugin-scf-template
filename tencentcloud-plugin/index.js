@@ -31,7 +31,8 @@ const modules = {
   SOE: require('./soe'),
   HTTPDNS: require('./httpdns'),
   TTS: require('./tts'),
-  TMT: require('./tmt')
+  TMT: require('./tmt'),
+  IAI: require('./iai')
 };
 
 /**

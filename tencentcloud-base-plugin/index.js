@@ -60,7 +60,7 @@ exports.main = async ({ secretId, secretKey, module, extraInfo }) => {
   // 获取UserUin
   const userUin = await getUserUin(secretId, secretKey);
   // 调用上报接口，此接口不返回上报状态
-  await uniCloud.httpclient.request('https://openapp.qq.com/api/public/index.php/upload', {
+  await uniCloud.httpclient.request('https://appdata.qq.com/upload', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
