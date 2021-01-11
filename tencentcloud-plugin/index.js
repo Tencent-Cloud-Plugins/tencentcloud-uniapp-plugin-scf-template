@@ -32,7 +32,8 @@ const modules = {
   HTTPDNS: require('./httpdns'),
   TTS: require('./tts'),
   TMT: require('./tmt'),
-  IAI: require('./iai')
+  IAI: require('./iai'),
+  FACEID: require('./faceid')
 };
 
 /**
